@@ -7,9 +7,9 @@ const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
 
 function newQuote() {
-  const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-  authorText.textContent = quote.author;
-  quoteText.textContent = quote.text;
+  const quote = apiQuotes;
+  authorText.textContent = quote.quoteAuthor;
+  quoteText.textContent = quote.quoteText;
 
   if (quote.text.length > 50) {
     quoteText.classList.add("long-quote");
@@ -17,16 +17,23 @@ function newQuote() {
     quoteText.classList.remove("long-quote");
   }
   quoteText.textContent = quote.text;
-  console.log(quote);
+  // console.log(quote);
 }
 
 async function getQuotes() {
-  const apiURL = "https://type.fit/api/quotes";
+  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+  const apiUrl =
+    "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json";
+
+  // const apiURL = "https://type.fit/api/quotes";
   try {
-    const response = await fetch(apiURL);
+    const response = await fetch(proxyUrl + apiUrl);
     apiQuotes = await response.json();
+    console.log(apiQuotes);
     newQuote();
-  } catch (error) {}
+  } catch (error) {
+    console.log("EERRRRRR" + error);
+  }
 }
 
 function tweetQuote() {
@@ -50,7 +57,7 @@ function twitterLogoAdd() {
   twitterBtn.classList.add("fa-x-twitter");
 }
 
-newQuoteBtn.addEventListener("click", newQuote);
+newQuoteBtn.addEventListener("click", getQuotes);
 twitterBtn.addEventListener("click", tweetQuote);
 twitterBtn.addEventListener("mouseover", xLogoAdd);
 twitterBtn.addEventListener("mouseleave", twitterLogoAdd);
