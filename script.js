@@ -34,7 +34,25 @@ function tweetQuote() {
   window.open(twitterUrl, "_blank");
 }
 
+function xLogoAdd() {
+  twitterBtn.classList.remove("fa-brands");
+  twitterBtn.classList.remove("fa-x-twitter");
+
+  twitterBtn.classList.add("fa-brands");
+  twitterBtn.classList.add("fa-twitter");
+}
+
+function twitterLogoAdd() {
+  twitterBtn.classList.remove("fa-brands");
+  twitterBtn.classList.remove("fa-twitter");
+
+  twitterBtn.classList.add("fa-brands");
+  twitterBtn.classList.add("fa-x-twitter");
+}
+
 newQuoteBtn.addEventListener("click", newQuote);
 twitterBtn.addEventListener("click", tweetQuote);
+twitterBtn.addEventListener("mouseover", xLogoAdd);
+twitterBtn.addEventListener("mouseleave", twitterLogoAdd);
 
 getQuotes();

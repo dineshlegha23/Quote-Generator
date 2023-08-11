@@ -35,7 +35,8 @@ body {
   font-size: 2rem;
 }
 
-.fa-quote-left {
+.fa-quote-left,
+.fa-quote-right {
   font-size: 4rem;
 }
 
@@ -59,7 +60,7 @@ button {
   border: none;
   border-radius: 10px;
   color: #fff;
-  background: #333;
+  background: #1114d4;
   outline: none;
   padding: 0.5rem 1.8rem;
   box-shadow: 0 0.3rem rgb(121, 121, 121, 0.65);
