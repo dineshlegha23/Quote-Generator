@@ -5,22 +5,35 @@ const quoteText = document.getElementById("quote");
 const authorText = document.getElementById("author");
 const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
+const loader = document.getElementById("loader");
+
+function loading() {
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+function complete() {
+  quoteContainer.hidden = false;
+  loader.hidden = true;
+}
 
 function newQuote() {
+  loading();
   const quote = apiQuotes;
   authorText.textContent = quote.quoteAuthor;
   quoteText.textContent = quote.quoteText;
 
-  if (quote.text.length > 50) {
+  if (quote.quoteText.length > 50) {
     quoteText.classList.add("long-quote");
   } else {
     quoteText.classList.remove("long-quote");
   }
-  quoteText.textContent = quote.text;
-  // console.log(quote);
+  quoteText.textContent = quote.quoteText;
+  complete();
 }
 
 async function getQuotes() {
+  loading();
   const proxyUrl = "https://cors-anywhere.herokuapp.com/";
   const apiUrl =
     "https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json";
